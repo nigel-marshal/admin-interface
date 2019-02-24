@@ -7,11 +7,20 @@ class App extends Component {
 	constructor() {
 		super();
 		this.state = {
-			AdsInfo: AdsInfo,
+			AdsInfo: [],
 			searchfield: ''
 		};
 	}
 
+	componentDidMount() {
+		fetch('https://jsonplaceholder.typicode.com/users')
+			.then((response) => {
+				return response.json();
+			})
+			.then((AdsInformation) => {
+				this.setState({ AdsInfo: AdsInformation });
+			});
+	}
 	onSearchChange = (event) => {
 		this.setState({ searchfield: event.target.value });
 	};
